@@ -88,10 +88,14 @@ public class WixServlet extends HttpServlet {
     	readFile("log.txt", false);    	
 
     }
-    public void clear(){
+    public void clear() throws FileNotFoundException, UnsupportedEncodingException{
     	taskList.clear();
         log.clear();
-        count = 0;	  
+        count = 0;	
+        history = new PrintWriter("log.txt", "UTF-8");
+        history.close();
+        tasks = new PrintWriter("tasks.txt", "UTF-8");
+        tasks.close();
   }
     
     
