@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title> First HTML PAGE </title>
+</head>
+<body>
+<h3>Add a task to the toDo list.</h3>
+<p>Write the name of the task below.</p>
+<form method="POST" action="toDo/add"/> 
+<input name="taskDesc" type="text" />
+
+<input type="submit" value="add task" />
+</form>
+
+<h3>Delete a toDo list task.</h3>
+<p>Write the ID of the task you wish to delete. If you don't remember the tasks ID, click on the button below to look at the list of tasks.</p>
+<form method="POST" action="toDo/delete"/> 
+<input name="taskID" id = "intNum" type="number" min="0" max="200" />
+<input type="submit" value="delete task" />
+</form>
+<br>
+<h3>Show me.</h3>
+<p> Update the display to show the history or the task list.</p>
+<form method="POST" action="toDo/update"/> 
+  <input type="radio" name="displayVal" value="tasks"> All Tasks<br>
+  <input type="radio" name="displayVal" value="log" checked> All Actions<br>
+<input type="submit" value="see list" />
+<table style="width:50%">
+<tr style="outline: thin solid">
+<td> ID </td>
+<td> Description </td>
+<td> timestamp </td>
+</tr>
+</table>
+</form>
+</body>
+</html>
