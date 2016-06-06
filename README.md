@@ -4,8 +4,7 @@ HTTP server for a to-do list app
 This is my HTTP Server.
 I created an HTML file called index.html, WixServlet.java, and a JUnit test file called ServletTest.java.
 
-Server: I used Jetty for the server. I exported my code to a .war file and deployed it using Jetty. The .war file is also included in this repo. To run the file, go into jetty-distribution-9.3.9.v20160517/demo-base-1 and call the command java -jar jetty-distribution-9.3.9.v20160517/start.j. Then navigate to your local host/WixChallenge/Index.html.
-
+Server: I used Jetty for the server. I exported my code to a .war file and deployed it using Jetty. The .war file is also included in this repo. 
 
 Storage: I chose to store my data as a hash and write it to a file for persistent storage. When the server is initialized, it searches for the specific data files and, if successful, reads in the task and log info. This ensures that the data is maintained across muliple relaunches.
 
@@ -16,3 +15,8 @@ WixServlet implements addItem, deleteItem, getAllItems, and showHistory. I modif
 The interface is very functional and not very designed - if I were creating a real app, I would spend more time developing the html files for a cleaner look. In the interest of time, I left it simple but organized. 
 
 Please let me know if you have any questions regarding implementation details!
+
+TO LAUNCH: In order to run the application, you will need to download Jetty. 
+Download the  jetty-distribution-9.3.9.v20160517 folder.  
+In your commandline, navigate to the jetty-distribution-9.3.9.v20160517/WixBase directory
+Call the command java -jar myDirectory/jetty-distribution-9.3.9.v20160517/start.j. Then navigate to http://localhost:8080//WixChallenge/
