@@ -11,7 +11,7 @@ This is my HTTP Server.
 
 3. Call the command java -jar myDirectory/jetty-distribution-9.3.9.v20160517/start.j. Then navigate to http://localhost:8080//WixChallenge/
 
-**Readme.**
+**Implementation Details.**
 
 I created an HTML file called index.html, WixServlet.java, and a JUnit test file called ServletTest.java.
 
