@@ -227,20 +227,20 @@ public class WixServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		
 		//to add a new task
-		if (request.getPathInfo().endsWith("/add")){				
+		if (request.getPathInfo().equals("/add")){			
 			addItem(request.getParameter("taskDesc"));
 			response.sendRedirect(request.getContextPath() + "/toDo/add");
 		}
 		
 		//to delete a task
-		else if (request.getPathInfo().endsWith("/delete")){	
+		else if (request.getPathInfo().equals("/delete")){	
 			int ID = Integer.parseInt(request.getParameter("taskID"));
 			deleteItem(ID);	
 			response.sendRedirect(request.getContextPath() + "/toDo/delete");
 		}
 		
 		//to change the display to feature either history or the task list
-		else if (request.getPathInfo().endsWith("/update")){			
+		else if (request.getPathInfo().equals("/update")){			
 			//to display the history
 			if (request.getParameter("displayVal").equals("log")){
 				changeDisplay = false;
@@ -250,7 +250,7 @@ public class WixServlet extends HttpServlet {
 			else {
 				changeDisplay = true;
 			}
-			response.sendRedirect(request.getContextPath() + "/toDo/update");
+			response.sendRedirect(request.getContextPath() + "/toDo");
 		}
 	}
 }
