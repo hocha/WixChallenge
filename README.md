@@ -13,7 +13,7 @@ This is my HTTP Server.
 
 I created an HTML file called index.html, WixServlet.java, and a JUnit test file called ServletTest.java.
 
-Server: I used Jetty for the server. I exported my code to a .war file and deployed it using Jetty. The .war file is also included in this repo. 
+Server: I used Jetty for the server. I exported my code to a .war file and deployed it using Jetty. 
 
 Storage: I chose to store my data as a hash and write it to a file for persistent storage. When the server is initialized, it searches for the specific data files and, if successful, reads in the task and log info. This ensures that the data is maintained across muliple relaunches.
 
