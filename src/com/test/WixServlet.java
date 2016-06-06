@@ -184,6 +184,15 @@ public class WixServlet extends HttpServlet {
     	return true;
     	
     }
+    public boolean deleteItem(int ID, String date){
+    	if (ID >= count){
+    		return false;
+    	}
+    	taskList.remove(ID);
+    	log.add(new TaskObj(ID, "deleted", date));	
+    	return true;
+    	
+    }
 
 	/**
 	 * Adds the specified item.
@@ -194,6 +203,16 @@ public class WixServlet extends HttpServlet {
     	DateFormat formatter = new SimpleDateFormat();
     	taskList.put(count, new TaskObj(count, description, formatter.format(date)));
     	log.add(new TaskObj(count, "added", formatter.format(date)));
+    	return count++;
+    }
+    
+	/**
+	 * Adds the specified item.
+	 * @return that items ID
+	 */  
+    public int addItem(String description, String date){
+    	taskList.put(count, new TaskObj(count, description, date));
+    	log.add(new TaskObj(count, "added", date));
     	return count++;
     }
     
