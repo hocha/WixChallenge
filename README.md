@@ -5,11 +5,9 @@ This is my HTTP Server.
 
 **TO LAUNCH**: In order to run the application, you will need to download Jetty. 
 
-1. Download the  jetty-distribution-9.3.9.v20160517 folder.  
+1. Clone the repo and navigate to the jetty-distribution-9.3.9.v20160517/WixBase directory in your commandline.
 
-2. In your commandline, navigate to the jetty-distribution-9.3.9.v20160517/WixBase directory
-
-3. Call the command java -jar myDirectory/jetty-distribution-9.3.9.v20160517/start.j. Then navigate to http://localhost:8080//WixChallenge/
+2. Call the command java -jar myDirectory/jetty-distribution-9.3.9.v20160517/start.j. Then navigate to http://localhost:8080//WixChallenge/
 
 **Implementation Details.**
 
