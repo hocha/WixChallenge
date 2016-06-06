@@ -17,6 +17,9 @@ The interface is very functional and not very designed - if I were creating a re
 Please let me know if you have any questions regarding implementation details!
 
 TO LAUNCH: In order to run the application, you will need to download Jetty. 
+
 Download the  jetty-distribution-9.3.9.v20160517 folder.  
+
 In your commandline, navigate to the jetty-distribution-9.3.9.v20160517/WixBase directory
+
 Call the command java -jar myDirectory/jetty-distribution-9.3.9.v20160517/start.j. Then navigate to http://localhost:8080//WixChallenge/
