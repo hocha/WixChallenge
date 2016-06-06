@@ -1,6 +1,0 @@
-PWD /Users/alizahochsztein/Downloads/jetty-distribution-9.3.9.v20160517/demo-base-1/webapps
-INPUT /usr/local/texlive/2015/texmf.cnf
-INPUT /usr/local/texlive/2015/texmf-dist/web2c/texmf.cnf
-INPUT /usr/local/texlive/2015/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/alizahochsztein/Downloads/jetty-distribution-9.3.9.v20160517/demo-base-1/webapps/JettyWarExample.xml
-OUTPUT /Users/alizahochsztein/Downloads/jetty-distribution-9.3.9.v20160517/demo-base-1/webapps/Output/JettyWarExample.log
