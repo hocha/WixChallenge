@@ -25,9 +25,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/toDo/*")
 public class WixServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String HTML_1 = "<html><head><meta charset=\"ISO-8859-1\"><title> First HTML PAGE </title></head><body><h3>Add a task to the toDo list.</h3><p>Write the name of the task below.</p><form method=\"POST\" action=\"toDo/add\"/><input name=\"taskDesc\" type=\"text\" /><input type=\"submit\" value=\"add task\" /></form><h3>Delete a toDo list task.</h3><p>Write the ID of the task you wish to delete. If you don't remember the tasks ID, click on the button below to look at the list of tasks.</p><form method=\"POST\" action=\"toDo/delete\"/><input name=\"taskID\" id = \"intNum\" type=\"number\" min=\"0\" max=\"";
-	private static final String HTML_2 = "\" /><input type=\"submit\" value=\"delete task\" /></form><br><h3>Show me.</h3><p> Update the display to show the action log or the task list.</p><form method=\"POST\" action=\"toDo/update\"/><input type=\"radio\" name=\"displayVal\" value=\"tasks\"> All Tasks<br><input type=\"radio\" name=\"displayVal\" value=\"log\" checked> All Actions<br><input type=\"submit\" value=\"see tasks\" /></form><table style=\"width:50%\"><tr style=\"outline: thin solid\"><td> ID </td><td> Description </td><td> timestamp </td></tr>";
-	private static final String HTML_3 = "</table></body></html>";
+	private static final String HTML_1 = "<html><head><meta charset=\"ISO-8859-1\"><title> To Do List </title><style>td{ padding:15px 15px 0 15px; }table { border: none; border-collapse: collapse; }table td { border-left: 4px solid #00008B; }table td:first-child { border-left: none; }</style></head><body><div style = \"background-color:darkblue\"><center><div class=\"container\"><h1><span style=\"color:white\"><font face=\"Tw Cen MT\" size=\"10\">ToDo List</font></span> </h1><h3><span style=\"color:lightblue\"><font face=\"Futura\"> Welcome to your personalized ToDo list app.</font></span> </h3></div></center></div><div class=\"container\"><table ><col width=\"40%\"><col width=\"40%\"><tr><td valign=\"top\"><center><div style=\"color:darkblue\"><h2><font face=\"Futura\"> What should I do?</font> </h2></center></div><ul><font face=\"Futura\"><h3>Add a task to the toDo list.</h3><p>Write the name of the task below.</p><form method=\"POST\" action=\"toDo/add\"/><input name=\"taskDesc\" type=\"text\" /><input type=\"submit\" value=\"add task\" /></form><br><h3>Delete a toDo list task.</h3><p>Write the ID of the task you wish to delete. If you don't remember the task's ID, click on the button below to look at the list of tasks.</p><form method=\"POST\" action=\"toDo/delete\"/><input name=\"taskID\" id = \"intNum\" type=\"number\" min=\"0\" max=\"";
+	private static final String HTML_2 = "\" /><input type=\"submit\" value=\"delete task\" /></form><br><h3>Show me.</h3><p> Update the display to show the history or the task list.</p><form method=\"POST\" action=\"toDo/update\"/><input type=\"radio\" name=\"displayVal\" value=\"tasks\"> All Tasks<br><input type=\"radio\" name=\"displayVal\" value=\"log\" checked> All Actions<br><input type=\"submit\" value=\"see list\" /></form></font></ul></td><td valign=\"top\"><center><div style=\"color:darkblue\"><h2><font face=\"Futura\"> What's on my list?</font> </h2></div><ul><font face=\"Futura\"><table style=\"width:100%\"><tr style=\"outline: thin solid\"><th> ID </th><th> Description </th><th> Timestamp </th></tr>";
+	private static final String HTML_3 = "</table></font></ul></center></td></tr></table></body></html>";
 	
 	private HashMap<Integer, TaskObj> taskList;
 	private HashSet<TaskObj> log;
@@ -227,20 +227,20 @@ public class WixServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		
 		//to add a new task
-		if (request.getPathInfo().equals("/add")){			
+		if (request.getPathInfo().endsWith("/add")){			
 			addItem(request.getParameter("taskDesc"));
 			response.sendRedirect(request.getContextPath() + "/toDo/add");
 		}
 		
 		//to delete a task
-		else if (request.getPathInfo().equals("/delete")){	
+		else if (request.getPathInfo().endsWith("/delete")){	
 			int ID = Integer.parseInt(request.getParameter("taskID"));
 			deleteItem(ID);	
 			response.sendRedirect(request.getContextPath() + "/toDo/delete");
 		}
 		
 		//to change the display to feature either history or the task list
-		else if (request.getPathInfo().equals("/update")){			
+		else if (request.getPathInfo().endsWith("/update")){			
 			//to display the history
 			if (request.getParameter("displayVal").equals("log")){
 				changeDisplay = false;

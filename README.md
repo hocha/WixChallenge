@@ -22,7 +22,7 @@ I created a TaskObj class in WixServlet that packages the task ID, description, 
 
 WixServlet implements addItem, deleteItem, getAllItems, and showHistory. I modified the doPost function to handle requests and call the appropriate function based on the request context. DoPost then redirect the URl, which calls the get endpoint. 
 
-The interface is very functional and not very designed - if I were creating a real app, I would spend more time developing the html files for a cleaner look. In the interest of time, I left it simple but organized. 
+The interface has a simple design that is functional and organized.
 
 Please let me know if you have any questions regarding implementation details!
 
