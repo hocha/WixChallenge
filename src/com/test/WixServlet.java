@@ -33,7 +33,6 @@ public class WixServlet extends HttpServlet {
 	private HashSet<TaskObj> log;
 	private int count;
 	private boolean changeDisplay;
-	private boolean processURL;
 	
 	
 	private PrintWriter tasks;
@@ -70,8 +69,7 @@ public class WixServlet extends HttpServlet {
 			
 		}
 	}
-	
-	
+		
        
     /**
      * @throws IOException 
@@ -82,12 +80,15 @@ public class WixServlet extends HttpServlet {
         taskList = new HashMap<Integer, TaskObj>();   	
     	log = new HashSet<TaskObj>();
     	changeDisplay = true;
-    	processURL = true;
     	count = 0;   
     	readFile("tasks.txt", true);
     	readFile("log.txt", false);    	
 
     }
+    /**
+     * Clears the task and log files to restart the program
+     */
+    
     public void clear() throws FileNotFoundException, UnsupportedEncodingException{
     	taskList.clear();
         log.clear();
@@ -149,6 +150,8 @@ public class WixServlet extends HttpServlet {
     	return taskList.values();
 
     }
+    
+    
 	/**
 	 * @return the history of actions
 	 * @throws UnsupportedEncodingException 
@@ -165,25 +168,32 @@ public class WixServlet extends HttpServlet {
     	history.close();   	
     	return log;
     }
+
+    
 	/**
 	 * Deletes the specified item
 	 */  
-    public boolean deleteItem(int ID, String date){
+    public boolean deleteItem(int ID){
     	if (ID >= count){
     		return false;
     	}
+    	Date date = new java.util.Date();
+    	DateFormat formatter = new SimpleDateFormat();
     	taskList.remove(ID);
-    	log.add(new TaskObj(ID, "deleted", date));	
+    	log.add(new TaskObj(ID, "deleted", formatter.format(date)));	
     	return true;
     	
     }
+
 	/**
 	 * Adds the specified item.
 	 * @return that items ID
 	 */  
-    public int addItem(String description, String time){
-    	taskList.put(count, new TaskObj(count, description, time));
-    	log.add(new TaskObj(count, "added", time));
+    public int addItem(String description){
+    	Date date = new java.util.Date();
+    	DateFormat formatter = new SimpleDateFormat();
+    	taskList.put(count, new TaskObj(count, description, formatter.format(date)));
+    	log.add(new TaskObj(count, "added", formatter.format(date)));
     	return count++;
     }
     
@@ -191,47 +201,7 @@ public class WixServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	doPost(request, response);
-    }
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Date d = new Date(request.getSession().getLastAccessedTime());
-		
-		DateFormat formatter = new SimpleDateFormat();
-		
-		//to add a new task
-		if (request.getPathInfo().endsWith("/add") && processURL){				
-			addItem(request.getParameter("taskDesc"), formatter.format(d));
-			processURL = false;
-			response.sendRedirect(request.getContextPath() + "/toDo/add");
-		}
-		
-		//to delete a task
-		else if (request.getPathInfo().endsWith("/delete") && processURL){	
-			int ID = Integer.parseInt(request.getParameter("taskID"));
-			deleteItem(ID, formatter.format(d));	
-			processURL = false;
-			response.sendRedirect(request.getContextPath() + "/toDo/delete");
-		}
-		
-		//to change the display to feature either history or the task list
-		else if (request.getPathInfo().endsWith("/update") && processURL){			
-			//to display the history
-			if (request.getParameter("displayVal").equals("log")){
-				changeDisplay = false;
-			}
-			
-			//to display the task list
-			else {
-				changeDisplay = true;
-			}
-			processURL = false;
-			response.sendRedirect(request.getContextPath() + "/toDo/update");
-		}
-		PrintWriter p = response.getWriter();
+    	PrintWriter p = response.getWriter();
 		p.append(HTML_1);
 		p.append("" + (count-1)); //to limit the delete option to be within range
 		p.append(HTML_2);
@@ -249,7 +219,39 @@ public class WixServlet extends HttpServlet {
 			p.append(sb);
 		}			
 		p.append(HTML_3);
-		processURL = true;
+    }
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		
+		//to add a new task
+		if (request.getPathInfo().endsWith("/add")){				
+			addItem(request.getParameter("taskDesc"));
+			response.sendRedirect(request.getContextPath() + "/toDo/add");
+		}
+		
+		//to delete a task
+		else if (request.getPathInfo().endsWith("/delete")){	
+			int ID = Integer.parseInt(request.getParameter("taskID"));
+			deleteItem(ID);	
+			response.sendRedirect(request.getContextPath() + "/toDo/delete");
+		}
+		
+		//to change the display to feature either history or the task list
+		else if (request.getPathInfo().endsWith("/update")){			
+			//to display the history
+			if (request.getParameter("displayVal").equals("log")){
+				changeDisplay = false;
+			}
+			
+			//to display the task list
+			else {
+				changeDisplay = true;
+			}
+			response.sendRedirect(request.getContextPath() + "/toDo/update");
+		}
 	}
 }
 
